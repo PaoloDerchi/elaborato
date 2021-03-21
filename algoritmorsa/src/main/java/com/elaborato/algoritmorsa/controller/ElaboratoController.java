@@ -20,7 +20,7 @@ public class ElaboratoController {
 			@RequestParam("cognome") String cognome,HttpServletRequest request
 		) throws UnknownHostException  {*/
 		
-		public String logInImpiegato(HttpServletRequest request) throws UnknownHostException  {
+		public String portalAccess(HttpServletRequest request) throws UnknownHostException  {
 		
 		String remoteHost = "";
 		String remoteAddr = "";
@@ -55,10 +55,10 @@ public class ElaboratoController {
 				"	 * La seguente funzione resetta il form principale\r\n" + 
 				"	 * ed elimina, se presente, il paragrafo con id='messaggioDiSuccesso'\r\n" + 
 				"	 */\r\n" + 
-				"      function CancelEntry() {\r\n" + 
+				"   /*   function CancelEntry() {\r\n" + 
 				"		document.getElementById(\"myForm\").reset();\r\n" + 
 				"		EraseMessage();\r\n" + 
-				"      }\r\n" + 
+				"      }*/\r\n" + 
 				"	/*\r\n" + 
 				"	 * La seguente funzione esegue un controllo sul valore inserito. \r\n" + 
 				"	 * Accetta solo il range di caratteri minuscoli e maiuscoli e lo spazio.\r\n" + 
@@ -87,8 +87,11 @@ public class ElaboratoController {
 				"			document.myForm.matricola.focus();\r\n" + 
 				"			return false;\r\n" + 
 				"		} else {\r\n" + 
-				"			document.getElementById(\"messaggistica\").innerHTML +=  \r\n" + 
-				"              ' <p align=\"center\" id=\"messaggioDiSuccesso\"><font face=\"Verdana\" color=\"blue\" size=\"10\">Inserimento Eseguito con successo!</font></p>'; 	\r\n" + 
+				"			/*document.getElementById(\"messaggistica\").innerHTML +=  \r\n" + 
+				"              ' <p align=\"center\" id=\"messaggioDiSuccesso\"><font face=\"Verdana\" color=\"blue\" size=\"10\">Inserimento Eseguito con successo!</font></p>'; 	*/\r\n" + 
+				"     \r\n" + 
+				"	  		myForm.submit();\r\n" + 
+				"\r\n" + 
 				"		}\r\n" + 
 				"	}\r\n" + 
 				"	</script>\r\n" + 
@@ -132,10 +135,9 @@ public class ElaboratoController {
 				"  </head>\r\n" + 
 				"  <body>\r\n" + 
 				"      <h1>Gestione Attività Impiegati</h1>\r\n" + 
-				"      <form action=\"\" method=\"get\"  id=\"myForm\" name=\"myForm\">\r\n" + 
+				"      <form  action=\"./logInImpiegato\" method=\"GET\"  id=\"myForm\" name=\"myForm\">\r\n" + 
 				"      <fieldset> \r\n" + 
-				"        <legend>Device :"+request.getHeader("User-Agent")+"</legend>\r\n" + 
-				"        <legend>Log In Impiegato</legend>\r\n"+
+				"        <legend >Log In Impiegato</legend>\r\n" + 
 				"					<table border=\"2\" >\r\n" + 
 				"						<tr>\r\n" + 
 				"							<!--Per l'input di testo viene eseguita la funzione removeNumber().\r\n" + 
@@ -158,7 +160,8 @@ public class ElaboratoController {
 				"		  <!--La funzione Validate() esegue una Validazione sui campi inseriti-->\r\n" + 
 				"		  <a href=\"javascript:Validate();\" class=\"bottone\">Invio</a>\r\n" + 
 				"		  <!--La funzione CancelEntry() esegue un refresh della form-->\r\n" + 
-				"		  <a href=\"javascript:CancelEntry();\" class=\"bottone\">Annulla</a>\r\n" + 
+				"			<a href=\"javascript:CancelEntry();\" class=\"bottone\">Annulla</a> \r\n" + 
+				"		   \r\n" + 
 				"        </td>\r\n" + 
 				"        <td></td>\r\n" + 
 				"        </tr>\r\n" + 
@@ -194,6 +197,24 @@ public class ElaboratoController {
 		return a;
 		
 	}
+	
+	
+	@RequestMapping(value = "/logInImpiegato", method = RequestMethod.GET)
+	/*public String logInImpiegato(@RequestParam("nome") String nome,
+			@RequestParam("cognome") String cognome,HttpServletRequest request
+		) throws UnknownHostException  {*/
+		
+		public String logInImpiegato(@RequestParam(required = false) String nome,
+				@RequestParam(required = false) String cognome,
+				@RequestParam(required = false) String matricola,
+				HttpServletRequest request) throws UnknownHostException  {
+		
+		System.out.println();
+		
+		
+		return "";
+	}
+	
 	
 
 }
