@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+     /*
+	 * La seguente funzione rimuove dal paragrafo con id='messaggioDiSuccesso il messaggio inserito'
+	 */
+     function EraseMessage(){
+		var par = document.getElementById('messaggioDiSuccesso');
+		if (par != null ){par.parentNode.removeChild(par);}
+	 }
+ 	/*
+	 * La seguente funzione resetta il form principale
+	 * ed elimina, se presente, il paragrafo con id='messaggioDiSuccesso'
+	 */
+   /*   function CancelEntry() {
+		document.getElementById("myForm").reset();
+		EraseMessage();
+      }*/
+	/*
+	 * La seguente funzione esegue un controllo sul valore inserito. 
+	 * Accetta solo il range di caratteri minuscoli e maiuscoli e lo spazio.
+	 */
+	  function removeNumber(inputTesto) { inputTesto.value=inputTesto.value.replace(/[^a-zA-Z ]/g,''); }
+	/*
+	 * La seguente funzione esegue un controllo sul valore inserito. 
+	 * Se è presente qualcosa diverso da numeri e il carattere / lo rimuove.
+	 */
+	  function removeCaracter(inputTesto) { inputTesto.value=inputTesto.value.replace(/[^0-9/]/g,''); }
+	  function Validate() {
+		EraseMessage();
+		var nome = document.myForm.nome.value;
+		var cognome = document.myForm.cognome.value;
+		var matricola = document.myForm.matricola.value;
+		if ((nome == "") || (nome == "undefined")) {
+			alert("Devi inserire un nome");
+			document.myForm.nome.focus();
+			return false;
+		} else if ((cognome == "") || (cognome == "undefined")) {
+			alert("Devi inserire un cognome");
+			document.myForm.cognome.focus();
+			return false;
+		} else if ((matricola == "") || (matricola == "undefined")) {
+			alert("Devi inserire un matricola");
+			document.myForm.matricola.focus();
+			return false;
+		} else {
+			/*document.getElementById("messaggistica").innerHTML +=  
+              ' <p align="center" id="messaggioDiSuccesso"><font face="Verdana" color="blue" size="10">Inserimento Eseguito con successo!</font></p>'; 	*/
+     
+	  		myForm.submit();
+
+		}
+	}
+	</script>
+    <style type="text/css">
+	h1 {
+	color:rgb(3, 10, 109) ; /*setup il colore del titolo 1*/
+	text-align:center;        /*l'allineamento al centro*/
+	font-weight:bold;		  /*il grassetto*/
+	}
+	fieldset{
+	border-color:rgb(179, 75, 6); /*setup il colore del fieldset con i colori rbg*/
+	}
+	table {
+	  margin-left: auto;  /*setup del margine tabella*/
+	  margin-right: auto;
+	}
+	td.mytdPersonal {
+		border: 1px solid black;
+   }
+	legend {
+		color:rgb(3, 10, 109)  ; /*setup del colore della legenda*/
+		text-align: center !important;
+		font-weight:bold;
+		font-size: 120%;
+	}
+	body{
+	background-color:rgb(71, 177, 124); /* setup del colore di sfondo */
+	}
+	.testo { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; color:rgb(179, 75, 6); font-weight:bold}
+	a.bottone {
+	color: #fff; /*colore del testo*/
+	text-decoration: none; /*eliminare la sottolineatura del testo */
+	background: rgb(212,75,56); /*sfondo del bottone*/
+	padding: .01em 1.5em; /*padding dal testo dal bordo del bottone*/
+	outline: none; /*eliminare bordo*/
+	}
+	a.bottone:hover { background: rgb(232,95,76); } /*cambio dello sfondo al passagio del mouse*/
+	a.bottone:active { background: rgb(152,15,0); } /*cambiare lo sfondo al premere bottone*/
+    </style>
+<title >Gestione Pratiche Impiegati</title>
+  </head>
+  <body>
+      <h1>Gestione Pratiche Impiegati</h1>
+      <form  action="./logInImpiegato" method="GET"  id="myForm" name="myForm">
+      <fieldset> 
+        <legend >Log In Impiegato</legend>
+					<table border="2" >
+						<tr>
+							<!--Per l'input di testo viene eseguita la funzione removeNumber().
+							Per ogni input di testo viene settata la massima lunghezza con l'attributo maxlength
+							-->
+						 <td class="testo">Nome</td> <td> <input type="text" name="nome"  maxlength="25"  onchange="removeNumber(this)" onkeyup="removeNumber(this)" title="Inserisci qui il tuo nome con al massimo 25 caratteri"/> </td>
+						</tr>
+						<tr>    
+						 <td class="testo">Cognome</td> <td> <input type="text" name="cognome" maxlength="25"  onchange="removeNumber(this)" onkeyup="removeNumber(this)"  title="Inserisci qui il tuo cognome con al massimo 25 caratteri" /></td>
+						</tr>
+						<tr>
+						<td class="testo">Matricola</td> <td><input type="text" name="matricola" maxlength="8"  title="Inserisci qui la tua matricola con al massimo 8 caratteri" /></td>
+						</tr>
+				  </table>
+      </fieldset> 
+      <table>
+        <tr>
+          <td></td>
+          <td>
+		  <!--La funzione Validate() esegue una Validazione sui campi inseriti-->
+		  <a href="javascript:Validate();" class="bottone">Invio</a>
+		  <!--La funzione CancelEntry() esegue un refresh della form-->
+			<a href="javascript:CancelEntry();" class="bottone">Annulla</a> 
+		   
+        </td>
+        <td></td>
+        </tr>
+      </table>
+	</form>
+	<table >
+		<tr ><div id="messaggistica"></div>
+		</tr>
+		<tr >
+			<!--Riferimenti all'autore del software-->
+			<td align="justify">	
+			<dl>
+				<dd >Creato da</dd>
+				<dd><address><a href="mailto:derchipaolo73@gmail.com">Paolo Derchi</a></address></dd>
+				<dd>Ultimo aggiornamento</dd>
+				<dd>4 Giugno 2021</time></dd>
+				<dd>
+			</dl>
+			<small>Tutti i contenuti sono prottetti dalla licenza creative commons</small>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" > <img src="https://www.istitutimezzacapo.it/website/wp-content/uploads/2018/09/istituti-mezzacapo.jpg" width="200" height="100"></td>
+		</tr>
+	</table>
+  </body>
+</html>
