@@ -12,52 +12,50 @@ import javax.persistence.Table;
 import org.json.JSONObject;
 
 @Entity
-@Table(name="product")
-public class Product {
+@Table(name="pratica")
+public class Pratica {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-    private String name;
+    private String argomento;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id")
-    private Company company;
+    @JoinColumn(name = "impiegato_id")
+    private Impiegato impiegato;
     
-    public Product(){
+    public Pratica(){
     }
     
-    public Product(String name, Company company){
-    	this.name = name;
-    	this.company = company;
+    public Pratica(String argomento, Impiegato impiegato){
+    	this.argomento = argomento;
+    	this.impiegato = impiegato;
     }
     
-    // name
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    // products
-    public void setCompany(Company company){
-    	this.company = company;
-    }
-    
-    public Company getCompany(){
-    	return this.company;
-    }
-    
-    public String toString(){
+    public String getArgomento() {
+		return argomento;
+	}
+
+	public void setArgomento(String argomento) {
+		this.argomento = argomento;
+	}
+
+	public Impiegato getImpiegato() {
+		return impiegato;
+	}
+
+	public void setImpiegato(Impiegato impiegato) {
+		this.impiegato = impiegato;
+	}
+
+	public String toString(){
     	String info = "";
     	
         JSONObject jsonInfo = new JSONObject();
-        jsonInfo.put("name",this.name);
+        jsonInfo.put("name",this.argomento);
         
         JSONObject companyObj = new JSONObject();
-        companyObj.put("name", this.company.getName());
+        companyObj.put("nome", this.impiegato.getNome());
         jsonInfo.put("company", companyObj);
         
         info = jsonInfo.toString();
