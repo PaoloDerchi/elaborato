@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import org.json.JSONObject;
 
 @Entity
-@Table(name="pratica")
-public class Pratica {
+@Table(name="materia")
+public class Materia {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +21,15 @@ public class Pratica {
     private String argomento;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "impiegato_id")
-    private Impiegato impiegato;
+    @JoinColumn(name = "docente_id")
+    private Docente docente;
     
-    public Pratica(){
+    public Materia(){
     }
     
-    public Pratica(String argomento, Impiegato impiegato){
+    public Materia(String argomento, Docente docente){
     	this.argomento = argomento;
-    	this.impiegato = impiegato;
+    	this.docente = docente;
     }
     
     public String getArgomento() {
@@ -40,12 +40,13 @@ public class Pratica {
 		this.argomento = argomento;
 	}
 
-	public Impiegato getImpiegato() {
-		return impiegato;
+
+	public Docente getDocente() {
+		return docente;
 	}
 
-	public void setImpiegato(Impiegato impiegato) {
-		this.impiegato = impiegato;
+	public void setDocente(Docente docente) {
+		this.docente = docente;
 	}
 
 	public String toString(){
@@ -55,7 +56,7 @@ public class Pratica {
         jsonInfo.put("name",this.argomento);
         
         JSONObject companyObj = new JSONObject();
-        companyObj.put("nome", this.impiegato.getNome());
+        companyObj.put("nome", this.docente.getNome());
         jsonInfo.put("company", companyObj);
         
         info = jsonInfo.toString();

@@ -19,7 +19,7 @@ public class Citta {
 	private int id;
 	
 	 @OneToMany(mappedBy = "citta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	 private Set<Impiegato> impiegato;
+	 private Set<Docente> docente;
 	
 	
 	private String cap;
@@ -36,11 +36,11 @@ public class Citta {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Set<Impiegato> getImpiegato() {
-		return impiegato;
+	public Set<Docente> getDocente() {
+		return docente;
 	}
-	public void setImpiegato(Set<Impiegato> impiegato) {
-		this.impiegato = impiegato;
+	public void setDocente(Set<Docente> docente) {
+		this.docente = docente;
 	}
 	
 	

@@ -17,29 +17,27 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 @Entity
-@Table(name="impiegato")
-public class Impiegato {
+@Table(name="docente")
+public class Docente {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int matricola;
     private String nome;
     private String cognome;
-    private String matricola;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "citta_id")
     private Citta citta;
     
-    @OneToMany(mappedBy = "impiegato", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Pratica> pratica;
+    @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Materia> pratica;
     
-    public Impiegato(){
+    public Docente(){
     }
     
-    public Impiegato(String nome,String cognome,String matricola){
+    public Docente(String nome,String cognome){
     	this.nome = nome;
     	this.cognome= cognome;
-    	this.matricola=matricola;
     }
     
     
@@ -59,21 +57,13 @@ public class Impiegato {
 		this.cognome = cognome;
 	}
 
-	public String getMatricola() {
-		return matricola;
-	}
 
-	public void setMatricola(String matricola) {
-		this.matricola = matricola;
-	}
-
-	
     
-    public Set<Pratica> getPratica() {
+    public Set<Materia> getPratica() {
 		return pratica;
 	}
 
-	public void setPratica(Set<Pratica> pratica) {
+	public void setPratica(Set<Materia> pratica) {
 		this.pratica = pratica;
 	}
 
