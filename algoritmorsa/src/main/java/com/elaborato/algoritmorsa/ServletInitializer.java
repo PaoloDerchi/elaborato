@@ -4,6 +4,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
+import com.elaborato.algoritmorsa.rsaUtil.RSA;
 import com.elaborato.algoritmorsa.rsaUtil.RSAOld;
 
 public class ServletInitializer extends SpringBootServletInitializer {
@@ -15,8 +16,8 @@ public class ServletInitializer extends SpringBootServletInitializer {
 	
 	
 	@Bean
-	public RSAOld getRestTemplate() {
-		RSAOld rsa = new RSAOld();
+	public RSA getRestTemplate() {
+		RSA rsa = new RSA(10);
 		return rsa;
 	}
 

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.elaborato.algoritmorsa.model.Docente;
 import com.elaborato.algoritmorsa.model.Materia;
 import com.elaborato.algoritmorsa.repository.DocenteRepository;
+import com.elaborato.algoritmorsa.rsaUtil.RSA;
 import com.elaborato.algoritmorsa.rsaUtil.RSAOld;
 
 @RestController
@@ -44,7 +45,7 @@ public class ElaboratoController {
 	
 	
 	@Autowired
-	private RSAOld rsa;
+	private RSA rsa;
 	
 	@Autowired
 	private DocenteRepository docenteRepository;
@@ -116,10 +117,8 @@ public class ElaboratoController {
 	@RequestMapping(value = "/praticheImpiegato", method = RequestMethod.GET)
 	public String logInImpiegato(@RequestParam(required = false) String rsaToken) throws UnknownHostException  {
 		
-		System.out.println();
-	String dec=	rsa.bytesToString(rsa.decrypt(rsaToken.getBytes(Charset.forName("UTF-8"))));
-
-	return dec;
+		
+	return "";
 }
 	
 	

@@ -70,12 +70,6 @@ public class RSA {
 		publicKey = publicKeyB.toString();
 		privateKey = privateKeyB.toString();
 		randomNumber = randomNumberB.toString();
-		//System.out.println("Public Key (E,N): " + publicKey + "," + randomNumber);
-		//System.out.println("Private Key (D,N): " + privateKey + "," + randomNumber);
-
-
-
-
 	}
 
 	/**
@@ -195,8 +189,6 @@ public class RSA {
 			digits = message.getBytes();
 			String ds = new String(digits);
 
-			//System.out.println("ds=" + ds);
-
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -218,9 +210,6 @@ public class RSA {
 		D = new BigInteger(privateKey);
 		N = new BigInteger(randomNumber);
 
-		//System.out.println("D = " + D);
-		//System.out.println("N = " + N);
-
 		int k1 = 0;
 		StringTokenizer st = new StringTokenizer(Dataencript);
 		while (st.hasMoreTokens()) {
@@ -237,9 +226,7 @@ public class RSA {
 			}
 			
 		}
-
 		recoveredPlaintext = decrypt(ciphertext1, D, N, k1);
-		//System.out.println(recoveredPlaintext);
 		return recoveredPlaintext;
 	}
 
@@ -276,7 +263,7 @@ public class RSA {
 	 * KeyGeneration Main program for Unit Testing.
 	 */
 	public static void main(String[] args) throws IOException {
-		RSA akg = new RSA(8);
+		RSA akg = new RSA(10);
 		
 		
 		String encryptedData = akg.RSAencrypt("Paolo");
