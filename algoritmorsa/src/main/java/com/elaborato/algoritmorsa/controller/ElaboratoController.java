@@ -52,9 +52,7 @@ public class ElaboratoController {
 				@RequestParam(required = false) String cognome,
 				@RequestParam(required = false) String matricola,
 				HttpServletRequest request) throws UnknownHostException  {
-		//String totale = nome+cognome+matricola;
-	//System.out.println(rsa.bytesToString(rsa.encrypt(totale.getBytes())));
-		//rsa.bytesToString(rsa.encrypt(totale.getBytes()));
+
 		return "<!DOCTYPE html>\r\n" + 
 				"<html>\r\n" + 
 				"  <head>\r\n" + 
