@@ -6,4 +6,6 @@ import com.elaborato.algoritmorsa.model.Docente;
 
 
 public interface DocenteRepository extends JpaRepository<Docente, Integer>{
+	
+	Docente findByNomeAndCognomeAndMatricola(String nome,String cognome, int matricola);
 }

@@ -48,7 +48,7 @@ public class RSAOld {
 		System.out.println("Decrypted String: " + new String(decrypted));
 	} */
 
-	public String bytesToString(byte[] encrypted) {
+	public  String bytesToString(byte[] encrypted) {
 		String test = "";
 		for (byte b : encrypted) {
 			test += Byte.toString(b);

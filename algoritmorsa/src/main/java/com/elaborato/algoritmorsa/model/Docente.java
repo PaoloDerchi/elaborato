@@ -30,7 +30,7 @@ public class Docente {
     private Citta citta;
     
     @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Materia> pratica;
+    private Set<Materia> materia;
     
     public Docente(){
     }
@@ -58,13 +58,28 @@ public class Docente {
 	}
 
 
-    
-    public Set<Materia> getPratica() {
-		return pratica;
+	public int getMatricola() {
+		return matricola;
 	}
 
-	public void setPratica(Set<Materia> pratica) {
-		this.pratica = pratica;
+	public void setMatricola(int matricola) {
+		this.matricola = matricola;
+	}
+
+	public Citta getCitta() {
+		return citta;
+	}
+
+	public void setCitta(Citta citta) {
+		this.citta = citta;
+	}
+
+	public Set<Materia> getMateria() {
+		return materia;
+	}
+
+	public void setMateria(Set<Materia> materia) {
+		this.materia = materia;
 	}
 
 	public String toString(){
@@ -74,8 +89,8 @@ public class Docente {
         jsonInfo.put("cognome",this.cognome);
         jsonInfo.put("matricola",this.matricola);
         JSONArray productArray = new JSONArray();
-        if(this.pratica != null){
-            this.pratica.forEach(product->{
+        if(this.materia != null){
+            this.materia.forEach(product->{
                 JSONObject subJson = new JSONObject();
                 subJson.put("name", product.getArgomento());
                 productArray.put(subJson);

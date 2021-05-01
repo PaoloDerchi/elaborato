@@ -8,7 +8,7 @@ import java.util.*;
 import java.sql.*;
 import javax.swing.*;
 
-public class RSA {
+public class RSASembrafunzionante {
 	/**
 	 * Bit length of each prime number.
 	 */
@@ -54,7 +54,7 @@ public class RSA {
 	private StringBuffer sb1 = new StringBuffer();
 	private String inputMessage, encryptedData, decryptedMessage;
 
-	public RSA(int primeSize) {
+	public RSASembrafunzionante(int primeSize) {
 
 		this.primeSize = primeSize;
 
@@ -70,11 +70,18 @@ public class RSA {
 		publicKey = publicKeyB.toString();
 		privateKey = privateKeyB.toString();
 		randomNumber = randomNumberB.toString();
-		//System.out.println("Public Key (E,N): " + publicKey + "," + randomNumber);
-		//System.out.println("Private Key (D,N): " + privateKey + "," + randomNumber);
+		System.out.println("Public Key (E,N): " + publicKey + "," + randomNumber);
+		System.out.println("Private Key (D,N): " + privateKey + "," + randomNumber);
 
+//Encrypt data
+		inputMessage = JOptionPane.showInputDialog(null, "Enter message to encrypt");
+		encryptedData = RSAencrypt(inputMessage);
+		System.out.println("Encrypted message" + encryptedData);
+		JOptionPane.showMessageDialog(null, "Encrypted Data " + "\n" + encryptedData);
 
-
+//Decrypt data
+		decryptedMessage = RSAdecrypt();
+		JOptionPane.showMessageDialog(null, "Decrypted Data " + "\n" + decryptedMessage);
 
 	}
 
@@ -195,7 +202,7 @@ public class RSA {
 			digits = message.getBytes();
 			String ds = new String(digits);
 
-			//System.out.println("ds=" + ds);
+			System.out.println("ds=" + ds);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -214,15 +221,15 @@ public class RSA {
 
 	/** Decrption */
 
-	public String RSAdecrypt(String Dataencript) {
+	public String RSAdecrypt() {
 		D = new BigInteger(privateKey);
 		N = new BigInteger(randomNumber);
 
-		//System.out.println("D = " + D);
-		//System.out.println("N = " + N);
+		System.out.println("D = " + D);
+		System.out.println("N = " + N);
 
 		int k1 = 0;
-		StringTokenizer st = new StringTokenizer(Dataencript);
+		StringTokenizer st = new StringTokenizer(encryptedData);
 		while (st.hasMoreTokens()) {
 			sarray1[k1] = st.nextToken(" ");
 			k1++;
@@ -239,7 +246,7 @@ public class RSA {
 		}
 
 		recoveredPlaintext = decrypt(ciphertext1, D, N, k1);
-		//System.out.println(recoveredPlaintext);
+		System.out.println(recoveredPlaintext);
 		return recoveredPlaintext;
 	}
 
@@ -277,16 +284,6 @@ public class RSA {
 	 */
 	public static void main(String[] args) throws IOException {
 		RSA akg = new RSA(8);
-		
-		
-		String encryptedData = akg.RSAencrypt("Paolo");
-		
-		System.out.println("encript"+encryptedData);
-		
-		String decryptedMessage = akg.RSAdecrypt(encryptedData);
-		
-		System.out.println("decript"+decryptedMessage);
-		
 		
 		/*  BigInteger[] a = akg.encrypt("paoloderchi");
 		  

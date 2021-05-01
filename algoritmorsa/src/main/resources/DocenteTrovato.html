@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+    
+    function getMaterie() {
+  		myForm.submit();
+}
+	</script>
+    <style type="text/css">
+	h1 {
+	color:rgb(3, 10, 109) ; /*setup il colore del titolo 1*/
+	text-align:center;        /*l'allineamento al centro*/
+	font-weight:bold;		  /*il grassetto*/
+	}
+	fieldset{
+	border-color:rgb(179, 75, 6); /*setup il colore del fieldset con i colori rbg*/
+	}
+	table {
+	  margin-left: auto;  /*setup del margine tabella*/
+	  margin-right: auto;
+	}
+	td.mytdPersonal {
+		border: 1px solid black;
+   }
+	legend {
+		color:rgb(3, 10, 109)  ; /*setup del colore della legenda*/
+		text-align: center !important;
+		font-weight:bold;
+		font-size: 120%;
+	}
+	body{
+	background-color:rgb(71, 177, 124); /* setup del colore di sfondo */
+	}
+	.testo { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; color:rgb(179, 75, 6); font-weight:bold}
+    .docente { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; color:rgb(26, 8, 105); font-weight:bold}
+    </style>
+<title >Gestione Materie Docenti</title>
+  </head>
+  <body>
+      <h1>Gestione Materie Docenti</h1>
+      <form  action="/algoritmorsa/homeRichiestaMaterie" method="GET"  id="myForm" name="myForm">
+      <fieldset> 
+        <legend >Token Generato per Docente</legend>
+					<table border="2" >
+						<tr>
+							<!--Per l'input di testo viene eseguita la funzione removeNumber().
+							Per ogni input di testo viene settata la massima lunghezza con l'attributo maxlength
+							-->
+						 <td class="testo">Nome</td>  <td class="docente">dd%nomeU%dd </td> 
+						</tr>
+						<tr>    
+						 <td class="testo">Cognome</td> <td  class="docente">dd%congomeU%dd</td> 
+						</tr>
+						<tr>
+						<td class="testo">Token</td> <td  class="docente">dd%tokenU%dd</td> 
+						</tr>
+				  </table>
+      </fieldset> 
+      <table>
+        <tr>
+          <td></td>
+          <td>
+		  <!--La funzione Validate() esegue una Validazione sui campi inseriti-->
+		  
+		  <!--La funzione CancelEntry() esegue un refresh della form-->
+			<a href="javascript:getMaterie();" class="bottone">Materie Associate</a> 
+		   
+        </td>
+        <td></td>
+        </tr>
+      </table>
+	</form>
+	<table >
+		<tr ><div id="messaggistica"></div>
+		</tr>
+		<tr >
+			<!--Riferimenti all'autore del software-->
+			<td align="justify">	
+			<dl>
+				<dd >Creato da</dd>
+				<dd><address><a href="mailto:derchipaolo73@gmail.com">Paolo Derchi</a></address></dd>
+				<dd>Ultimo aggiornamento</dd>
+				<dd>4 Giugno 2021</time></dd>
+				<dd>
+			</dl>
+			<small>Tutti i contenuti sono prottetti dalla licenza creative commons</small>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" > <img src="https://www.istitutimezzacapo.it/website/wp-content/uploads/2018/09/istituti-mezzacapo.jpg" width="200" height="100"></td>
+		</tr>
+	</table>
+  </body>
+</html>
