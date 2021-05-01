@@ -108,6 +108,7 @@ public class ElaboratoController {
 	@RequestMapping(value = "/homeRichiestaMaterie", method = RequestMethod.GET)
 	public String richiestaMaterie() throws UnknownHostException  {
 		
+		
 		System.out.println();
 		return "";
 	}
