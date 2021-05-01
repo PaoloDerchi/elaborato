@@ -6,5 +6,5 @@ import com.elaborato.algoritmorsa.model.Materia;
 
 
 
-public interface PraticaRepository extends JpaRepository<Materia, Integer>{
+public interface MateriaRepository extends JpaRepository<Materia, Integer>{
 }
