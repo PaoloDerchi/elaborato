@@ -8,6 +8,10 @@ import java.util.*;
 import java.sql.*;
 import javax.swing.*;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+
 public class RSA {
 	/**
 	 * Bit length of each prime number.
@@ -33,6 +37,10 @@ public class RSA {
 	 * Public exponent E and Private exponent D
 	 */
 	private BigInteger E, D;
+	
+	
+	
+
 
 	private String nt, dt, et;
 	/**
@@ -56,8 +64,7 @@ public class RSA {
 
 	public RSA(int primeSize) {
 
-		this.primeSize = primeSize;
-
+		this.primeSize=primeSize;
 // Generate two distinct large prime numbers p and q.
 		generatePrimeNumbers();
 
@@ -262,8 +269,8 @@ public class RSA {
 	/**
 	 * KeyGeneration Main program for Unit Testing.
 	 */
-	public static void main(String[] args) throws IOException {
-		RSA akg = new RSA(10);
+//	public static void main(String[] args) throws IOException {
+		/*RSA akg = new RSA(10);
 		
 		
 		String encryptedData = akg.RSAencrypt("Paolo");
@@ -273,7 +280,7 @@ public class RSA {
 		String decryptedMessage = akg.RSAdecrypt(encryptedData);
 		
 		System.out.println("decript"+decryptedMessage);
-		
+		*/
 		
 		/*  BigInteger[] a = akg.encrypt("paoloderchi");
 		  
@@ -285,6 +292,6 @@ public class RSA {
 		  
 		 // System.out.println(ritorno);
 		 
-	}
+	//}
 
 }

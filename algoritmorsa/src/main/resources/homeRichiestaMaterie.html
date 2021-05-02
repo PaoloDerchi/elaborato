@@ -3,54 +3,25 @@
   <head>
     <meta charset="UTF-8">
     <script>
-     /*
-	 * La seguente funzione rimuove dal paragrafo con id='messaggioDiSuccesso il messaggio inserito'
-	 */
-     function EraseMessage(){
-		var par = document.getElementById('messaggioDiSuccesso');
-		if (par != null ){par.parentNode.removeChild(par);}
-	 }
+     
  	/*
 	 * La seguente funzione resetta il form principale
 	 * ed elimina, se presente, il paragrafo con id='messaggioDiSuccesso'
 	 */
-   /*   function CancelEntry() {
+     function CancelEntry() {
 		document.getElementById("myForm").reset();
-		EraseMessage();
-      }*/
-	/*
-	 * La seguente funzione esegue un controllo sul valore inserito. 
-	 * Accetta solo il range di caratteri minuscoli e maiuscoli e lo spazio.
-	 */
-	  function removeNumber(inputTesto) { inputTesto.value=inputTesto.value.replace(/[^a-zA-Z ]/g,''); }
-	/*
-	 * La seguente funzione esegue un controllo sul valore inserito. 
-	 * Se è presente qualcosa diverso da numeri e il carattere / lo rimuove.
-	 */
-	  function removeCaracter(inputTesto) { inputTesto.value=inputTesto.value.replace(/[^0-9/]/g,''); }
+		
+      }
+
 	  function Validate() {
-		EraseMessage();
-		var nome = document.myForm.nome.value;
-		var cognome = document.myForm.cognome.value;
-		var matricola = document.myForm.matricola.value;
-		if ((nome == "") || (nome == "undefined")) {
-			alert("Devi inserire un nome");
-			document.myForm.nome.focus();
-			return false;
-		} else if ((cognome == "") || (cognome == "undefined")) {
-			alert("Devi inserire un cognome");
-			document.myForm.cognome.focus();
-			return false;
-		} else if ((matricola == "") || (matricola == "undefined")) {
-			alert("Devi inserire un matricola");
-			document.myForm.matricola.focus();
+		var token = document.myForm.token.value;
+		
+		if ((token == "") || (token == "undefined")) {
+			alert("Devi inserire un token");
+			document.myForm.token.focus();
 			return false;
 		} else {
-			/*document.getElementById("messaggistica").innerHTML +=  
-              ' <p align="center" id="messaggioDiSuccesso"><font face="Verdana" color="blue" size="10">Inserimento Eseguito con successo!</font></p>'; 	*/
-     
 	  		myForm.submit();
-
 		}
 	}
 	</script>
@@ -94,15 +65,12 @@
   </head>
   <body>
       <h1>Gestione Materie Docenti</h1>
-      <form  action="./logInImpiegato" method="GET"  id="myForm" name="myForm">
+      <form  action="/algoritmorsa/materieDocente" method="GET"  id="myForm" name="myForm">
       <fieldset> 
         <legend >Richiesta Materie per Docente</legend>
 					<table border="2" >
 						<tr>
-							<!--Per l'input di testo viene eseguita la funzione removeNumber().
-							Per ogni input di testo viene settata la massima lunghezza con l'attributo maxlength
-							-->
-						 <td class="testo">Token</td> <td> <input type="text" name="nome"  maxlength="25"  onchange="removeNumber(this)" onkeyup="removeNumber(this)" title="Inserisci qui il tuo nome con al massimo 25 caratteri"/> </td>
+						 <td class="testo">Token Ricevuto</td> <td> <input type="text" name="token"  maxlength="255"  style="width: 900px;" title="Inserisci qui il token ricevuto con al massimo 25 caratteri"/> </td>
 						</tr>
 				  </table>
       </fieldset> 

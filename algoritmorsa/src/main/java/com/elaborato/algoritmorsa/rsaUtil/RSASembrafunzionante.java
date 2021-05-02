@@ -283,7 +283,7 @@ public class RSASembrafunzionante {
 	 * KeyGeneration Main program for Unit Testing.
 	 */
 	public static void main(String[] args) throws IOException {
-		RSA akg = new RSA(8);
+		//RSA akg = new RSA(8);
 		
 		/*  BigInteger[] a = akg.encrypt("paoloderchi");
 		  

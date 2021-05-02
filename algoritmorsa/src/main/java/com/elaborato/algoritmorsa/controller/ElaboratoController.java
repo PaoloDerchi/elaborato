@@ -42,10 +42,13 @@ public class ElaboratoController {
 	@Value("classpath:DocenteTrovato.html")
 	private Resource docenteTrovato;
 	
+	@Value("classpath:homeRichiestaMaterie.html")
+	private Resource homeRichiestaMaterie;
+	
 	
 	
 	@Autowired
-	private RSA rsa;
+	private RSA rsa; 
 	
 	@Autowired
 	private DocenteRepository docenteRepository;
@@ -69,36 +72,31 @@ public class ElaboratoController {
 				@RequestParam(required = false) String cognome,
 				@RequestParam(required = false) String matricola,
 				HttpServletRequest request) throws IOException  {
-		
-		
-		
-		
+		/*
+		 * Ricerca del Docente per Nome, Cognome e matricola
+		 */
 		Docente  docente = 	docenteRepository.findByNomeAndCognomeAndMatricola(nome.toLowerCase(), cognome.toLowerCase(), Integer.valueOf(matricola));
-		
-		
+
 		if(docente == null) {
+			/*
+			 * Utente non trovato
+			 */
 			 Reader reader = new InputStreamReader(docenteSconoscito.getInputStream());
-		        String docenteSconosicuto = FileCopyUtils.copyToString(reader);
-		        
+		        String docenteSconosicuto = FileCopyUtils.copyToString(reader);  
 		        return docenteSconosicuto;
 		}
-		
-		/*Set<Materia> d = docente.getMateria();
-	
-		for (Materia materia : d) {
-			System.out.println("materia " + materia.getArgomento());
-		}
-		*/
-		System.out.println();
-		
-		
-		
 
-		 Reader reader = new InputStreamReader(docenteTrovato.getInputStream());
+		Reader reader = new InputStreamReader(docenteTrovato.getInputStream());
         String docenteTrovato = FileCopyUtils.copyToString(reader);
         docenteTrovato = docenteTrovato.replace("dd%nomeU%dd", docente.getNome());
         docenteTrovato = docenteTrovato.replace("dd%congomeU%dd", docente.getCognome());
-        docenteTrovato = docenteTrovato.replace("dd%tokenU%dd", "");
+        /*
+         * Esecuzione Encript RSA
+         */
+        String encryptDocente= rsa.RSAencrypt(docente.getNome()+docente.getCognome()+docente.getMatricola());
+        docenteTrovato = docenteTrovato.replace("dd%tokenU%dd", encryptDocente);
+        
+       // String decrupt = rsa.RSAdecrypt(encryptDocente);
         
         return docenteTrovato;
 		
@@ -106,18 +104,20 @@ public class ElaboratoController {
 	}
 	
 	@RequestMapping(value = "/homeRichiestaMaterie", method = RequestMethod.GET)
-	public String richiestaMaterie() throws UnknownHostException  {
-		
-		
-		System.out.println();
-		return "";
+	public String richiestaMaterie() throws IOException  {
+		 Reader reader = new InputStreamReader(homeRichiestaMaterie.getInputStream());
+	     String paginaHome = FileCopyUtils.copyToString(reader);
+		return paginaHome;
 	}
 	
 	
 	
-	@RequestMapping(value = "/praticheImpiegato", method = RequestMethod.GET)
-	public String logInImpiegato(@RequestParam(required = false) String rsaToken) throws UnknownHostException  {
+	@RequestMapping(value = "/materieDocente", method = RequestMethod.GET)
+	public String logInImpiegato(@RequestParam(required = false) String token) throws UnknownHostException  {
 		
+		 String decrupt = rsa.RSAdecrypt(token);
+		 
+		System.out.println(decrupt);
 		
 	return "";
 }

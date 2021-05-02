@@ -3,21 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <script>
-     /*
-	 * La seguente funzione rimuove dal paragrafo con id='messaggioDiSuccesso il messaggio inserito'
-	 */
-     function EraseMessage(){
-		var par = document.getElementById('messaggioDiSuccesso');
-		if (par != null ){par.parentNode.removeChild(par);}
-	 }
  	/*
 	 * La seguente funzione resetta il form principale
 	 * ed elimina, se presente, il paragrafo con id='messaggioDiSuccesso'
 	 */
-   /*   function CancelEntry() {
+    function CancelEntry() {
 		document.getElementById("myForm").reset();
 		EraseMessage();
-      }*/
+      }
 	/*
 	 * La seguente funzione esegue un controllo sul valore inserito. 
 	 * Accetta solo il range di caratteri minuscoli e maiuscoli e lo spazio.
@@ -29,7 +22,6 @@
 	 */
 	  function removeCaracter(inputTesto) { inputTesto.value=inputTesto.value.replace(/[^0-9/]/g,''); }
 	  function Validate() {
-		EraseMessage();
 		var nome = document.myForm.nome.value;
 		var cognome = document.myForm.cognome.value;
 		var matricola = document.myForm.matricola.value;
@@ -46,9 +38,6 @@
 			document.myForm.matricola.focus();
 			return false;
 		} else {
-			/*document.getElementById("messaggistica").innerHTML +=  
-              ' <p align="center" id="messaggioDiSuccesso"><font face="Verdana" color="blue" size="10">Inserimento Eseguito con successo!</font></p>'; 	*/
-     
 	  		myForm.submit();
 
 		}
@@ -108,7 +97,7 @@
 						 <td class="testo">Cognome</td> <td> <input type="text" name="cognome" maxlength="25"  onchange="removeNumber(this)" onkeyup="removeNumber(this)"  title="Inserisci qui il tuo cognome con al massimo 25 caratteri" /></td>
 						</tr>
 						<tr>
-						<td class="testo">Matricola</td> <td><input type="text" name="matricola" maxlength="8"  title="Inserisci qui la tua matricola con al massimo 8 caratteri" /></td>
+						<td class="testo">Matricola</td> <td><input type="text" name="matricola" maxlength="8"  onchange="removeCaracter(this)" onkeyup="removeCaracter(this)"  title="Inserisci qui la tua matricola con al massimo 8 caratteri" /></td>
 						</tr>
 				  </table>
       </fieldset> 

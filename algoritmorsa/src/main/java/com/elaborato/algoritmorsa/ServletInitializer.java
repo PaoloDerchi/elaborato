@@ -14,11 +14,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 		return application.sources(AlgoritmorsaApplication.class);
 	}
 	
+
 	
-	@Bean
-	public RSA getRestTemplate() {
-		RSA rsa = new RSA(10);
-		return rsa;
-	}
 
 }

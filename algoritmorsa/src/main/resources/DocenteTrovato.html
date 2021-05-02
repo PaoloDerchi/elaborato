@@ -35,6 +35,17 @@
 	}
 	.testo { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; color:rgb(179, 75, 6); font-weight:bold}
     .docente { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; color:rgb(26, 8, 105); font-weight:bold}
+    
+    a.bottone {
+	color: #fff; /*colore del testo*/
+	text-decoration: none; /*eliminare la sottolineatura del testo */
+	background: rgb(212,75,56); /*sfondo del bottone*/
+	padding: .01em 1.5em; /*padding dal testo dal bordo del bottone*/
+	outline: none; /*eliminare bordo*/
+	}
+	a.bottone:hover { background: rgb(232,95,76); } /*cambio dello sfondo al passagio del mouse*/
+	a.bottone:active { background: rgb(152,15,0); } /*cambiare lo sfondo al premere bottone*/
+    
     </style>
 <title >Gestione Materie Docenti</title>
   </head>
@@ -45,9 +56,6 @@
         <legend >Token Generato per Docente</legend>
 					<table border="2" >
 						<tr>
-							<!--Per l'input di testo viene eseguita la funzione removeNumber().
-							Per ogni input di testo viene settata la massima lunghezza con l'attributo maxlength
-							-->
 						 <td class="testo">Nome</td>  <td class="docente">dd%nomeU%dd </td> 
 						</tr>
 						<tr>    
@@ -62,18 +70,16 @@
         <tr>
           <td></td>
           <td>
-		  <!--La funzione Validate() esegue una Validazione sui campi inseriti-->
-		  
-		  <!--La funzione CancelEntry() esegue un refresh della form-->
-			<a href="javascript:getMaterie();" class="bottone">Materie Associate</a> 
-		   
-        </td>
+
+		  <!--La funzione getMaterie() pagina di home richiesta materie-->
+			<a href="javascript:getMaterie();" class="bottone">Materie</a> 
+       </td>
         <td></td>
         </tr>
       </table>
 	</form>
 	<table >
-		<tr ><div id="messaggistica"></div>
+		<tr ></div>
 		</tr>
 		<tr >
 			<!--Riferimenti all'autore del software-->
