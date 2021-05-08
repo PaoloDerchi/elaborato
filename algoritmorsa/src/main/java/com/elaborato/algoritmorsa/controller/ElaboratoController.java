@@ -41,7 +41,7 @@ public class ElaboratoController {
 
 	@Value("classpath:MaterieDiCompetenza.html")
 	private Resource MaterieDiCompetenza;
-	
+
 	@Autowired
 	private RSA rsa;
 
@@ -102,11 +102,18 @@ public class ElaboratoController {
 	@RequestMapping(value = "/materieDocente", method = RequestMethod.GET)
 	public String logInImpiegato(@RequestParam(required = false) String token) throws IOException {
 
-		String decript = rsa.RSAdecrypt(token);
+		String decript;
+		try {
+			decript = rsa.RSAdecrypt(token);
+		} catch (NumberFormatException e) {
+			Reader reader = new InputStreamReader(docenteSconoscito.getInputStream());
+			String docenteSconosicuto = FileCopyUtils.copyToString(reader);
+			return docenteSconosicuto;
+		}
 
 		String[] val = decript.split("_");
-		
-		if(val.length!=3) {
+
+		if (val.length != 3) {
 			Reader reader = new InputStreamReader(docenteSconoscito.getInputStream());
 			String docenteSconosicuto = FileCopyUtils.copyToString(reader);
 			return docenteSconosicuto;
@@ -115,6 +122,14 @@ public class ElaboratoController {
 		String nome = val[0];
 		String cognome = val[1];
 		String matricola = val[2];
+
+		try {
+			Integer.parseInt(matricola);
+		} catch (NumberFormatException e) {
+			Reader reader = new InputStreamReader(docenteSconoscito.getInputStream());
+			String docenteSconosicuto = FileCopyUtils.copyToString(reader);
+			return docenteSconosicuto;
+		}
 
 		Docente docente = docenteRepository.findByNomeAndCognomeAndMatricola(nome.toLowerCase(), cognome.toLowerCase(),
 				Integer.valueOf(matricola));
@@ -125,24 +140,20 @@ public class ElaboratoController {
 			return docenteSconosicuto;
 		}
 
-		
-		Set<Materia> materie = 	docente.getMateria();
-		String htmldelleMaterie= "";
+		Set<Materia> materie = docente.getMateria();
+		String htmldelleMaterie = "";
 		for (Materia materia : materie) {
-			htmldelleMaterie+= "<tr> <td  style=\"text-align:center;\"  colspan=\"2\" class=\"materia\">";
-			htmldelleMaterie+=materia.getArgomento()+ "</td> </tr>";
+			htmldelleMaterie += "<tr> <td  style=\"text-align:center;\"  colspan=\"2\" class=\"materia\">";
+			htmldelleMaterie += materia.getArgomento() + "</td> </tr>";
 		}
 
-		
 		Reader reader = new InputStreamReader(MaterieDiCompetenza.getInputStream());
 		String htmlritornoMaterie = FileCopyUtils.copyToString(reader);
 		htmlritornoMaterie = htmlritornoMaterie.replace("dd%materieU%dd", htmldelleMaterie);
-	
-		
+
 		htmlritornoMaterie = htmlritornoMaterie.replace("dd%nomeU%dd", docente.getNome());
 		htmlritornoMaterie = htmlritornoMaterie.replace("dd%congomeU%dd", docente.getCognome());
-		
-		
+
 		System.out.println(decript);
 
 		return htmlritornoMaterie;

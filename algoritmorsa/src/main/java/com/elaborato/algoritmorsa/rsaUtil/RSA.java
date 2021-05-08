@@ -207,7 +207,7 @@ public class RSA {
 	}
 
 	/** Decription */
-	public String RSAdecrypt(String Dataencript) {
+	public String RSAdecrypt(String Dataencript) throws NumberFormatException {
 		D = new BigInteger(privateKey);
 		N = new BigInteger(randomNumber);
 		 String sarray1[] = new String[100000];
