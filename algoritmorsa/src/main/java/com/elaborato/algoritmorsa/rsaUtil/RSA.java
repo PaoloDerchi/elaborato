@@ -38,11 +38,7 @@ public class RSA {
 	 */
 	private BigInteger E, D;
 	
-	
-	
 
-
-	private String nt, dt, et;
 	/**
 	 * Constructor.
 	 *
@@ -53,14 +49,7 @@ public class RSA {
 	private String privateKey;
 	private String randomNumber;
 
-	private BigInteger[] ciphertext;
-	private int m[] = new int[1000];
-	private String st[] = new String[1000];
-	private String str = "";
-	private String sarray1[] = new String[100000];
 
-	private StringBuffer sb1 = new StringBuffer();
-	private String inputMessage, encryptedData, decryptedMessage;
 
 	public RSA(int primeSize) {
 
@@ -171,8 +160,13 @@ public class RSA {
 
 		E = new BigInteger(publicKey);
 		N = new BigInteger(randomNumber);
+		StringBuffer sb1 = new StringBuffer();
+		String str = "";
 		try {
-			ciphertext = encrypt(info);
+
+		BigInteger[] ciphertext = encrypt(info);
+		String st[] = new String[1000];
+		int m[] = new int[1000];
 			for (int i = 0; i < ciphertext.length; i++) {
 				m[i] = ciphertext[i].intValue();
 				st[i] = String.valueOf(m[i]);
@@ -183,6 +177,7 @@ public class RSA {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+			return str;
 		}
 
 		return str;
@@ -211,12 +206,11 @@ public class RSA {
 		return (encrypted);
 	}
 
-	/** Decrption */
-
+	/** Decription */
 	public String RSAdecrypt(String Dataencript) {
 		D = new BigInteger(privateKey);
 		N = new BigInteger(randomNumber);
-
+		 String sarray1[] = new String[100000];
 		int k1 = 0;
 		StringTokenizer st = new StringTokenizer(Dataencript);
 		while (st.hasMoreTokens()) {
