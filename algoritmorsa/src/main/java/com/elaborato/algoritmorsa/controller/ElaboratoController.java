@@ -105,6 +105,12 @@ public class ElaboratoController {
 		String decript = rsa.RSAdecrypt(token);
 
 		String[] val = decript.split("_");
+		
+		if(val.length!=3) {
+			Reader reader = new InputStreamReader(docenteSconoscito.getInputStream());
+			String docenteSconosicuto = FileCopyUtils.copyToString(reader);
+			return docenteSconosicuto;
+		}
 
 		String nome = val[0];
 		String cognome = val[1];
