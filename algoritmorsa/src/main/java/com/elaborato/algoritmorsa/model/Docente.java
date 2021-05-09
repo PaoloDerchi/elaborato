@@ -3,6 +3,7 @@ package com.elaborato.algoritmorsa.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,8 +25,14 @@ public class Docente {
 	private int matricola;
     private String nome;
     private String cognome;
+
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Column(name = "superuser", nullable = false)
+    private boolean superuser = false;
+    
+
+
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "citta_id")
     private Citta citta;
     
@@ -80,6 +87,19 @@ public class Docente {
 
 	public void setMateria(Set<Materia> materia) {
 		this.materia = materia;
+	}
+	
+	
+
+
+
+
+	public boolean isSuperuser() {
+		return superuser;
+	}
+
+	public void setSuperuser(boolean superuser) {
+		this.superuser = superuser;
 	}
 
 	public String toString(){

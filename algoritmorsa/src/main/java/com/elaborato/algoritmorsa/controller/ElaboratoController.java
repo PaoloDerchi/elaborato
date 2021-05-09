@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,13 +35,19 @@ public class ElaboratoController {
 	private Resource docenteSconoscito;
 
 	@Value("classpath:DocenteTrovato.html")
-	private Resource docenteTrovato;
+	private Resource docenteTrovatoResource;
 
 	@Value("classpath:homeRichiestaMaterie.html")
 	private Resource homeRichiestaMaterie;
 
 	@Value("classpath:MaterieDiCompetenza.html")
 	private Resource MaterieDiCompetenza;
+	
+	
+	@Value("classpath:ListaDocentiPerCitta.html")
+	private Resource listaDocentiPerCittaResource;
+	
+
 
 	@Autowired
 	private RSA rsa;
@@ -76,9 +83,13 @@ public class ElaboratoController {
 			String docenteSconosicuto = FileCopyUtils.copyToString(reader);
 			return docenteSconosicuto;
 		}
+		
+		String docenteTrovato;
+		
+		if(docente.isSuperuser() == false) {
 
-		Reader reader = new InputStreamReader(docenteTrovato.getInputStream());
-		String docenteTrovato = FileCopyUtils.copyToString(reader);
+		Reader reader = new InputStreamReader(docenteTrovatoResource.getInputStream());
+		docenteTrovato = FileCopyUtils.copyToString(reader);
 		docenteTrovato = docenteTrovato.replace("dd%nomeU%dd", docente.getNome());
 		docenteTrovato = docenteTrovato.replace("dd%congomeU%dd", docente.getCognome());
 		/*
@@ -87,7 +98,18 @@ public class ElaboratoController {
 		String encryptDocente = rsa
 				.RSAencrypt(docente.getNome() + "_" + docente.getCognome() + "_" + docente.getMatricola());
 		docenteTrovato = docenteTrovato.replace("dd%tokenU%dd", encryptDocente);
-
+		} else {
+			//Super Utente
+			Reader reader = new InputStreamReader(listaDocentiPerCittaResource.getInputStream());
+			docenteTrovato = FileCopyUtils.copyToString(reader);
+			
+			String htmlDocentiCitta="";
+			List<Docente>  listadocenti = docenteRepository.findAll();
+			for (Docente docenteN : listadocenti) {
+				htmlDocentiCitta += "<tr> <td class=\"materia\">" +docenteN.getNome() +" "+ docenteN.getCognome()+"</td>" + "<td class=\"materia\">" + docenteN.getCitta().getNome() +"</td> </tr>" ;
+			}
+			docenteTrovato = docenteTrovato.replace("dd%DocenteCitta%dd", htmlDocentiCitta);			
+		}
 		return docenteTrovato;
 
 	}
