@@ -15,16 +15,19 @@ import org.springframework.stereotype.Component;
 public class RSA {
 	/**
 	 * Bit length of each prime number.
+	 * (Lunghezza del bit di ogni numero primo)
 	 */
 	private int primeSize;
 
 	/**
 	 * Two distinct large prime numbers p and q.
+	 * (Due grandi numeri primi distinti p e q)
 	 */
 	private BigInteger p, q;
 
 	/**
 	 * Modulus N.
+	 * (Modulo N)
 	 */
 	private BigInteger N;
 
@@ -35,29 +38,32 @@ public class RSA {
 
 	/**
 	 * Public exponent E and Private exponent D
+	 * (Esponente pubblico E ed esponente privato D)
 	 */
 	private BigInteger E, D;
 	
 
-	/**
-	 * Constructor.
-	 *
-	 * @param primeSize Bit length of each prime number.
-	 */
+	
 
 	private String publicKey;
 	private String privateKey;
 	private String randomNumber;
 
 
-
+	/**
+	 * Constructor.
+	 * (Costruttore)
+	 * @param primeSize Bit length of each prime number.
+	 */
 	public RSA(int primeSize) {
 
 		this.primeSize=primeSize;
-// Generate two distinct large prime numbers p and q.
+        // Generate two distinct large prime numbers p and q.
+		// (Genera due grandi numeri primi distinti p e q)
 		generatePrimeNumbers();
 
-// Generate Public and Private Keys.
+        // Generate Public and Private Keys.
+		// (Generare chiavi pubbliche e private)
 		generatePublicPrivateKeys();
 
 		BigInteger publicKeyB = getE();
@@ -70,10 +76,19 @@ public class RSA {
 
 	/**
 	 * Generate two distinct large prime numbers p and q.
+	 * (Genera due grandi numeri primi distinti p e q)
 	 */
 	public void generatePrimeNumbers() {
+		// Generates a random integer prime number 
+		// (Genera un numero Primo intero randomico)
+		
+		//Constructs a randomly generated positive BigInteger that is probably prime, 
+		//with the specified bitLength
 		p = new BigInteger(primeSize, 10, new Random());
 
+		
+		// Generates a random integer prime number other than the first number generated
+		// (Genera un numero primo intero casuale diverso dal primo numero generato)
 		do {
 			q = new BigInteger(primeSize, 10, new Random());
 		} while (q.compareTo(p) == 0);
@@ -81,28 +96,37 @@ public class RSA {
 
 	/**
 	 * Generate Public and Private Keys.
+	 * (Generare chiavi pubbliche e private)
 	 */
 	public void generatePublicPrivateKeys() {
-// N = p * q
+        // N = p * q
 		N = p.multiply(q);
 
-// r = ( p – 1 ) * ( q – 1 )
+        // r = ( p – 1 ) * ( q – 1 )
+		
+		// subtract returns a BigInteger whose value is (p - 1)
 		r = p.subtract(BigInteger.valueOf(1));
 		r = r.multiply(q.subtract(BigInteger.valueOf(1))); // (p-1)(q-1)
 
-// Choose E, coprime to and less than r
+		//
+		// Public exponent E and Private exponent D
+		// (Esponente pubblico E ed esponente privato D)
+		
+        // Choose E, coprime to and less than r
+		// (Scegliere E, coprimo a e minore di r)
 		do {
 			E = new BigInteger(2 * primeSize, new Random());
 		} while ((E.compareTo(r) != -1) || (E.gcd(r).compareTo(BigInteger.valueOf(1)) != 0));
 
-// Compute D, the inverse of E mod r
+        // Compute D, the inverse of E mod r
+		// (Calcola D, l'inverso di E mod r)
+		// modInverse returns a BigInteger whose value is (E ^ -1 mod m)
 		D = E.modInverse(r);
 
 	}
-
+ 
 	/**
 	 * Get prime number p.
-	 *
 	 * @return Prime number p.
 	 */
 	public BigInteger getp() {
@@ -111,7 +135,6 @@ public class RSA {
 
 	/**
 	 * Get prime number q.
-	 *
 	 * @return Prime number q.
 	 */
 	public BigInteger getq() {
@@ -120,7 +143,6 @@ public class RSA {
 
 	/**
 	 * Get r.
-	 *
 	 * @return r.
 	 */
 	public BigInteger getr() {
@@ -129,7 +151,6 @@ public class RSA {
 
 	/**
 	 * Get modulus N.
-	 *
 	 * @return Modulus N.
 	 */
 	public BigInteger getN() {
@@ -138,7 +159,6 @@ public class RSA {
 
 	/**
 	 * Get Public exponent E.
-	 *
 	 * @return Public exponent E.
 	 */
 	public BigInteger getE() {
@@ -147,7 +167,6 @@ public class RSA {
 
 	/**
 	 * Get Private exponent D.
-	 *
 	 * @return Private exponent D.
 	 */
 	public BigInteger getD() {
@@ -155,7 +174,6 @@ public class RSA {
 	}
 
 	/** Encryption */
-
 	public String RSAencrypt(String info) {
 
 		E = new BigInteger(publicKey);
@@ -188,9 +206,8 @@ public class RSA {
 		byte[] temp = new byte[1];
 		byte[] digits = new byte[8];
 		try {
+			// Convert a String message in array of byte
 			digits = message.getBytes();
-			String ds = new String(digits);
-
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -199,6 +216,8 @@ public class RSA {
 			temp[0] = digits[i];
 			bigdigits[i] = new BigInteger(temp);
 		}
+		
+		// modPow Returns a BigInteger whose value is ( bigdigits[i] ^ E mod m).
 		BigInteger[] encrypted = new BigInteger[bigdigits.length];
 		for (i = 0; i < bigdigits.length; i++)
 			encrypted[i] = bigdigits[i].modPow(E, N);
@@ -235,6 +254,7 @@ public class RSA {
 		int i;
 		String rs = "";
 		BigInteger[] decrypted = new BigInteger[size];
+		// modPow Returns a BigInteger whose value is ( encrypted[i] ^ D mod m).
 		for (i = 0; i < decrypted.length; i++) {
 			if(encrypted[i] != null) {
 				decrypted[i] = encrypted[i].modPow(D, N);
@@ -263,29 +283,14 @@ public class RSA {
 	/**
 	 * KeyGeneration Main program for Unit Testing.
 	 */
-//	public static void main(String[] args) throws IOException {
-		/*RSA akg = new RSA(10);
-		
-		
+/*	public static void main(String[] args) throws IOException {
+		RSA akg = new RSA(10);
 		String encryptedData = akg.RSAencrypt("Paolo");
-		
 		System.out.println("encript"+encryptedData);
-		
 		String decryptedMessage = akg.RSAdecrypt(encryptedData);
-		
 		System.out.println("decript"+decryptedMessage);
-		*/
-		
-		/*  BigInteger[] a = akg.encrypt("paoloderchi");
-		  
-		
+
 		 
-		 
-		  
-		  String ritorno = akg.decrypt(a, akg.getD(), akg.getN(), a.length);*/
-		  
-		 // System.out.println(ritorno);
-		 
-	//}
+	}*/
 
 }
