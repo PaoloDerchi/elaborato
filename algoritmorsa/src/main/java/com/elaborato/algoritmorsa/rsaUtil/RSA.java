@@ -114,6 +114,7 @@ public class RSA {
 		
         // Choose E, coprime to and less than r
 		// (Scegliere E, coprimo a e minore di r)
+		// gcd returns a BigInteger whose value is the greatest common divisor of abs(E) and abs(r)
 		do {
 			E = new BigInteger(2 * primeSize, new Random());
 		} while ((E.compareTo(r) != -1) || (E.gcd(r).compareTo(BigInteger.valueOf(1)) != 0));
