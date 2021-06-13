@@ -114,14 +114,18 @@ public class RSA {
 		
         // Choose E, coprime to and less than r
 		// (Scegliere E, coprimo a e minore di r)
-		// gcd returns a BigInteger whose value is the greatest common divisor of abs(E) and abs(r)
+		// gcd (Greatest Common Division) returns a BigInteger whose value is the greatest common divisor of abs(E) and abs(r)
+		// PUBLIC EXP
 		do {
 			E = new BigInteger(2 * primeSize, new Random());
 		} while ((E.compareTo(r) != -1) || (E.gcd(r).compareTo(BigInteger.valueOf(1)) != 0));
 
+		
+		//
         // Compute D, the inverse of E mod r
 		// (Calcola D, l'inverso di E mod r)
 		// modInverse returns a BigInteger whose value is (E ^ -1 mod m)
+		//PRIVATE EXP
 		D = E.modInverse(r);
 
 	}
