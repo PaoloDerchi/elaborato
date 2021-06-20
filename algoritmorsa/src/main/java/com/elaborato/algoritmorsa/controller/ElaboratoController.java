@@ -54,7 +54,8 @@ public class ElaboratoController {
 
 	@Autowired
 	private DocenteRepository docenteRepository;
-
+	
+   //http://localhost:8080/algoritmorsa/
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String portalAccess(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
 

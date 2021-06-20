@@ -288,14 +288,15 @@ public class RSA {
 	/**
 	 * KeyGeneration Main program for Unit Testing.
 	 */
-/*	public static void main(String[] args) throws IOException {
-		RSA akg = new RSA(10);
+//	public static void main(String[] args) throws IOException {
+		/*		RSA akg = new RSA(10);
 		String encryptedData = akg.RSAencrypt("Paolo");
 		System.out.println("encript"+encryptedData);
 		String decryptedMessage = akg.RSAdecrypt(encryptedData);
 		System.out.println("decript"+decryptedMessage);
-
+         */
+		//System.out.println("Leonardo.Lombardi@eng.it".toLowerCase());
 		 
-	}*/
+	//}
 
 }
